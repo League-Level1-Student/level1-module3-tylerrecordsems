@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -25,7 +26,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 * When the user clicks on a secret place, stuff will happen.
 	 * 
 	 * 1. Make the frame respond to mouse clicks.
-	 * 
+	  JFrame frame = new JFrame
 	 * 2. When the mouse is clicked, use the Media Palace (read the code in the magic_box package) to play sounds, 
 	 *    show images or speak.
 	 * 
@@ -36,10 +37,10 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 *   
 	 *     
 	 */
-
+	
 	BufferedImage backgroundImage;
-
-
+	MediaPalace mp = new MediaPalace();
+	
 	@Override
 	public void run() {
 		try {
@@ -54,6 +55,8 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
+		frame.addMouseListener(this);
+	      
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -76,9 +79,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println(backgroundImage.getRGB(e.getX(), e.getY()));
 		
+		if(backgroundImage.getRGB(e.getX(), e.getY()) == -529982) {
+			mp.speak("Hello");
+			//label = mp.loadImageFromTheInternet("https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fd%2Fd4%2FTwo_diamonds_grown_by_Washington_Diamonds.jpg&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ATwo_diamonds_grown_by_Washington_Diamonds.jpg&tbnid=tXE_NoD8O3kwwM&vet=12ahUKEwi7nM_VgLjuAhW_AjQIHf13DAUQMygGegUIARCWAg..i&docid=IT32gZdxnULcjM&w=660&h=453&q=diamond&safe=active&ved=2ahUKEwi7nM_VgLjuAhW_AjQIHf13DAUQMygGegUIARCWAg");
+		}
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
