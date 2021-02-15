@@ -14,7 +14,9 @@ public class CowTimer {
 	 * 1. Make a constructor for the CowTimer class that initializes the minutes
 	 * variable
 	 */
-CowTimer cow = new CowTimer(); 
+public CowTimer(int minutes) {
+	this.minutes=minutes;
+}
 	/* 4. Complete the main method of the CowTimerRunner class */
 
 	private int minutes;
@@ -25,7 +27,16 @@ CowTimer cow = new CowTimer();
 	}
 
 	public void start() throws InterruptedException {
-		/*
+		for (int i = minutes; i > 0; i--) {
+			System.out.println(i+" Minutes");
+			Thread.sleep(60000);
+		
+
+		
+		}
+		playSound("moo.wav");
+		System.out.println("MOOOOOO!");
+				/*
 		 * 2. Count down the minutes, print the current minute then sleep for the number
 		 * of minutes using Thread.sleep(int milliseconds).
 		 */
